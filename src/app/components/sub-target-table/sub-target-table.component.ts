@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SubTarget } from 'src/app/shared/interfaces/target.interface';
 
 @Component({
@@ -11,10 +11,12 @@ export class SubTargetTableComponent implements OnInit {
   @Input() targetId: string;
   @Input() subTargets: SubTarget[];
 
+  @Output() refreshTable: EventEmitter<number> = new EventEmitter<number>();
+
   displayedColumns: string[] = [
     'expandIcon', 
     'Sub Target ID',
-    'Name',
+    'Sub Target Name',
     'Index',
     'Value',
     'Unit',
@@ -29,6 +31,10 @@ export class SubTargetTableComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  refreshMainTable(): void {
+    this.refreshTable.next(1);
   }
 
 }

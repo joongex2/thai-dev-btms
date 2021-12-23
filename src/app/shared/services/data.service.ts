@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { RunningNo, RunningNoData, SubTarget, Target } from "../interfaces/target.interface";
+import { Method, RunningNo, RunningNoData, SubTarget, SubTargetRecord, Target } from "../interfaces/target.interface";
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
@@ -24,7 +24,7 @@ export class DataService {
                     {
                         "data": {
                             "Target ID": "1",
-                            "Name": "รายงานการกระทำที่เป็นอันตราย",
+                            "Name": "รายงานการกระทำที่เป็นอันตรายและสภาพการที่เป็นอันตรายที่ได้รับขึ้นทะเบียน (unsafe act)",
                             "Standard": "ISO 14001/ISO 45001",
                             "Relative Target": "4"
                         },
@@ -34,7 +34,7 @@ export class DataService {
                                     {
                                         "data": {
                                             "Sub Target ID": "1",
-                                            "Name": "รายงานการกระทำที่เป็นอันตราย...",
+                                            "Sub Target Name": "รายงานการกระทำที่เป็นอันตรายและสภาพการที่เป็นอันตรายที่ได้รับขึ้นทะเบียน (unsafe act)",
                                             "Index": "ฉบับ/เดือน",
                                             "Value": ">=1",
                                             "Unit": "เรื่อง/เดือน",
@@ -50,20 +50,24 @@ export class DataService {
                                                     {
                                                         "data": {
                                                             ['Method ID']: "1",
-                                                            "Name": "1",
-                                                            "Jan": "1",
-                                                            "Feb": "1",
-                                                            "Mar": "1",
-                                                            "Apr": "1",
-                                                            "May": "1",
-                                                            "Jun": "1",
-                                                            "Jul": "1",
-                                                            "Aug": "1",
-                                                            "Sep": "1",
-                                                            "Oct": "1",
-                                                            "Nov": "1",
-                                                            "Dev": "1",
-                                                            "Owner": "1"
+                                                            ["Method Name"]: `1.ศึกษารายงานการกระทำที่เป็นอันตราย / สภาพที่เป็นอันตราย 
+                                                            2. ประชุมชี้แจงพนักงานในแผนก 
+                                                            3. พนักงานในแผนกดำเนินการค้นหาและบันทึกรายงานการกระทำที่เป็นอันตราย
+                                                            4. ตรวจสอบและประเมินจำนวนของบันทึกรายงานการกระทำที่เป็นอันตราย / สภาพที่เป็นอันตราย ในแต่ละเดือน
+                                                                `,
+                                                            "Jan": "1.000",
+                                                            "Feb": "1.000",
+                                                            "Mar": "1.000",
+                                                            "Apr": "1.000",
+                                                            "May": "1.000",
+                                                            "Jun": "1.000",
+                                                            "Jul": "1.000",
+                                                            "Aug": "1.000",
+                                                            "Sep": "1.000",
+                                                            "Oct": "1.000",
+                                                            "Nov": "1.000",
+                                                            "Dec": "1.000",
+                                                            "Owner": "Department manager Maintenance Process Machine 1 PC"
                                                         },
                                                         "kids": {
 
@@ -159,13 +163,18 @@ export class DataService {
     addSubTarget(runningNo: string, targetId: string, subTarget: SubTarget): Target {
         const _runningNo = this.getRunningNo(runningNo);
         const target = _runningNo.kids.has_targets.records.find((target) => target.data["Target ID"] === targetId);
-        console.log(target);
+        if (!target.kids.has_sub_targets) { target.kids.has_sub_targets = { records: [] } }
         target.kids.has_sub_targets.records.push({ data: subTarget, kids: { has_methods: undefined } });
         return target;
     }
 
-    addMethod(runningNo: string, targetId: string, subTargetId: string) {
-
+    addMethod(runningNo: string, targetId: string, subTargetId: string, method: Method): SubTargetRecord {
+        const _runningNo = this.getRunningNo(runningNo);
+        const target = _runningNo.kids.has_targets.records.find((target) => target.data["Target ID"] === targetId);
+        const subTarget = target.kids.has_sub_targets.records.find((subTarget) => subTarget.data["Sub Target ID"] === subTargetId);
+        if (!subTarget.kids.has_methods) { subTarget.kids.has_methods = { records: [] } }
+        subTarget.kids.has_methods.records.push({ data: method, kids: undefined });
+        return subTarget;
     }
 
 }

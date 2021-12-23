@@ -1,3 +1,13 @@
 .add-colon::before {
     content: ":";
 }
+
+@media only screen and (max-width: 768px) {
+    .mat-table {
+        overflow-x: scroll;
+    }
+    .mat-row,
+    .mat-header-row {
+        min-width: 800px;
+    }
+}

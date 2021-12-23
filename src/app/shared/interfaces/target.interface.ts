@@ -1,6 +1,6 @@
 export interface SubTarget {
     ['Sub Target ID']: string;
-    Name: string;
+    ['Sub Target Name']: string;
     Index: string;
     Value: string;
     Unit: string;
@@ -13,7 +13,7 @@ export interface SubTarget {
 
 export interface Method {
     ['Method ID']: string;
-    Name: string;
+    ['Method Name']: string;
     Jan: string;
     Feb: string;
     Mar: string;
@@ -25,7 +25,7 @@ export interface Method {
     Sep: string;
     Oct: string;
     Nov: string;
-    Dev: string;
+    Dec: string;
     Owner: string;
 }
 

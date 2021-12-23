@@ -41,7 +41,7 @@ export class TargetDashboardComponent implements OnInit {
 
   displayedColumns: string[] = [
     'Running No.',
-    'Revision No',
+    'Revision No.',
     'Modify No.',
     'Create Date',
     'Issued Date',

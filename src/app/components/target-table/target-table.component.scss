@@ -1,4 +1,4 @@
-div {
+div.target-table {
     margin: 12px 10px;
     border: 1px solid #80808036;
   
@@ -19,3 +19,27 @@ div {
     background-color: inherit; 
     }
 }
+
+.table-title {
+    font-size: 1rem;
+}
+
+ng-select.required:after, form-control.required:after {
+    color: #d00;
+    content: "*";
+    position: absolute;
+    margin-left: 8px;
+    top:7px;
+}
+
+@media only screen and (max-width: 768px) {
+    .mat-table {
+        overflow-x: scroll;
+    }
+    .mat-row,
+    .mat-header-row {
+        min-width: 800px;
+    }
+}
+
+

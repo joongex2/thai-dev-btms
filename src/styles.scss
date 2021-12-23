@@ -9,3 +9,133 @@
 * {
     font-family: 'Kanit', sans-serif;
 }
+
+label:not(.form-check-label):not(.custom-file-label) {
+    font-weight: 400;
+}
+
+// target column width set
+.mat-column-expandIcon {
+    flex-basis: 5%;
+}
+
+.mat-column-Target-ID {
+    flex-basis: 10%;
+}
+
+.mat-column-Name {
+    flex-basis: 55%;
+}
+
+.mat-column-Standard {
+    flex-basis: 15%;
+}
+
+.mat-column-Relative-Target {
+    flex-basis: 10%;
+}
+
+.mat-column-deleteIcon {
+    flex-basis: 5%;
+}
+
+// sub target column width set
+.mat-column-Sub-Target-ID {
+    flex-basis: 5%;
+}
+
+.mat-column-Sub-Target-Name {
+    flex-basis: 15%;
+}
+
+.mat-column-Index {
+    flex-basis: 10%;
+}
+
+.mat-column-Value {
+    flex-basis: 10%;
+}
+
+.mat-column-Unit {
+    flex-basis: 10%;
+}
+
+.mat-column-Current-Value {
+    flex-basis: 10%;
+}
+
+.mat-column-Start-Month {
+    flex-basis: 7.5%;
+}
+
+.mat-column-Start-Year {
+    flex-basis: 7.5%;
+}
+
+.mat-column-Finish-Month {
+    flex-basis: 7.5%;
+}
+
+.mat-column-Finish-Year {
+    flex-basis: 7.5%;
+}
+
+// method column width set
+.mat-column-Method-ID {
+    flex-basis: 7.5%;
+}
+.mat-column-Method-Name {
+    flex-basis: 22.5%;
+}
+
+.mat-column-Jan {
+    flex-basis: 5%;
+}
+
+.mat-column-Feb {
+    flex-basis: 5%;
+}
+
+.mat-column-Mar {
+    flex-basis: 5%;
+}
+
+.mat-column-Apr {
+    flex-basis: 5%;
+}
+
+.mat-column-May {
+    flex-basis: 5%;
+}
+
+.mat-column-Jun {
+    flex-basis: 5%;
+}
+
+.mat-column-Jul {
+    flex-basis: 5%;
+}
+
+.mat-column-Aug {
+    flex-basis: 5%;
+}
+
+.mat-column-Sep {
+    flex-basis: 5%;
+}
+
+.mat-column-Oct {
+    flex-basis: 5%;
+}
+
+.mat-column-Nov {
+    flex-basis: 5%;
+}
+
+.mat-column-Dec {
+    flex-basis: 5%;
+}
+
+.mat-column-Owner {
+    flex-basis: 10%;
+}

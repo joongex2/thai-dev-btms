@@ -13,7 +13,7 @@ export class MethodTableComponent implements OnInit {
 
   displayedColumns: string[] = [
     'Method ID',
-    'Name',
+    'Method Name',
     'Jan',
     'Feb',
     'Mar',
@@ -25,7 +25,7 @@ export class MethodTableComponent implements OnInit {
     'Sep',
     'Oct',
     'Nov',
-    'Dev',
+    'Dec',
     'Owner'
   ];
 

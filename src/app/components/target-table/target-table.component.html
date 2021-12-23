@@ -1,10 +1,10 @@
-<div [class.sub-row]="title">
-    <p>{{ title }}</p>
+<div class="target-table" [class.sub-row]="title">
+    <p class="table-title">{{ title }}</p>
     <mat-table [dataSource]="dataSource" multiTemplateDataRows>
 
         <!-- COLUMNS AND ROWS-->
         <ng-container *ngFor="let key of displayedColumns" [matColumnDef]="key">
-            <mat-header-cell *matHeaderCellDef>{{ key.includes('Icon') ? '' : key }}</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>{{ key.includes('Icon') ? '' : keyToColumnName[key] }}</mat-header-cell>
 
             <mat-cell *matCellDef="let element; let i = dataIndex">
 
@@ -18,11 +18,11 @@
                     <!-- <mat-icon *ngIf="!title && key === 'deleteIcon'" (click)="deleteTarget.next(i)">delete_forever
                     </mat-icon> -->
 
-                    <button *ngIf="renderTemplate === 'subTarget' && key === 'deleteIcon'" (click)="addSubTarget.next(element.data['Target ID'])">Add Sub Target
-                    </button>
+                    <a *ngIf="renderTemplate === 'subTarget' && key === 'deleteIcon'" (click)="addSubTarget(element.data['Target ID'], subTargetModal)" style="cursor: pointer; color: rgba(0,0,0,.87);"><i class="fas fa-plus"></i>
+                    </a>
 
-                    <button *ngIf="renderTemplate === 'method' && key === 'deleteIcon'" (click)="addMethod.next(element.data['Sub Target ID'])">Add Method
-                    </button>
+                    <a *ngIf="renderTemplate === 'method' && key === 'deleteIcon'" (click)="addMethod(element.data['Sub Target ID'], methodModal)" style="cursor: pointer; color: rgba(0,0,0,.87);"><i class="fas fa-plus"></i>
+                    </a>
                 </ng-template>
 
             </mat-cell>
@@ -35,7 +35,9 @@
 
                 <div *ngIf="element.data[referenceId] === expandedId" class="width-100" [ngSwitch]="renderTemplate">
 
-                    <app-sub-target-table *ngSwitchCase="'subTarget'" [runningNo]="runningNo" [targetId]="element.data['Target ID']" [subTargets]="element.kids.has_sub_targets.records">
+                    <app-sub-target-table *ngSwitchCase="'subTarget'" [runningNo]="runningNo" [targetId]="element.data['Target ID']" [subTargets]="element.kids.has_sub_targets.records"
+                        (refreshTable)="refreshMasterTable()"
+                    >
                     </app-sub-target-table>
 
                     <app-method-table *ngSwitchCase="'method'" [runningNo]="runningNo" [targetId]="targetId" [methods]="element.kids.has_methods.records">
@@ -56,3 +58,184 @@
 
     </mat-table>
 </div>
+
+<ng-template #subTargetModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">เป้าหมายย่อย</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="row mb-2">
+                <div class="col-md-3">ลำดับที่</div>
+                <div class="col-md-6">1</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-3">ประเภทการวัดผล</div>
+                <div class="col-md-9">
+                    <ng-select [items]="type" bindLabel="name" bindValue="value"
+                        [(ngModel)]="selectedType" placeholder="กรุณาเลือก" name="type">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-3">หัวข้อเป้าหมาย</div>
+                <div class="col-md-9">
+                    <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-3">ดัชนี</div>
+                <div class="col-md-9">
+                    <input class="form-control" id="index">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-3">ค่าเป้าหมาย</div>
+                <div class="col-md-2">
+                    <ng-select [items]="targetValues" bindLabel="name" bindValue="value" [(ngModel)]="selectedTargetValue"
+                        placeholder="กรุณาเลือก" name="targetValue">
+                    </ng-select>
+                </div>
+                <div class="col-md-3">
+                    <input class="form-control required"/>
+                </div>
+                <div class="col-md-1">หน่วย</div>
+                <div class="col-md-3">
+                    <input class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-3">ค่าปัจจุบัน</div>
+                <div class="col-md-4">
+                    <input class="form-control required">
+                </div>
+                <div class="col-md-2">ข้อมูลอ้างอิง</div>
+                <div class="col-md-3">
+                    <input class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-3">กำหนดเริ่ม</div>
+                <div class="col-md-4">
+                    <ng-select class="required" [items]="start1" bindLabel="name" bindValue="value" [(ngModel)]="selectedStart1"
+                        placeholder="กรุณาเลือก" name="start1">
+                    </ng-select>
+                </div>
+                <div class="col-md-4">
+                    <ng-select class="required" [items]="start2" bindLabel="name" bindValue="value" [(ngModel)]="selectedStart2"
+                        placeholder="กรุณาเลือก" name="start2">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-3">กำหนดเสร็จ</div>
+                <div class="col-md-4">
+                    <ng-select class="required" [items]="finish1" bindLabel="name" bindValue="value" [(ngModel)]="selectedFinish1"
+                        placeholder="กรุณาเลือก" name="finish1">
+                    </ng-select>
+                </div>
+                <div class="col-md-4">
+                    <ng-select class="required" [items]="finish2" bindLabel="name" bindValue="value" [(ngModel)]="selectedFinish2"
+                        placeholder="กรุณาเลือก" name="finish2">
+                    </ng-select>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">ตกลง</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">ยกเลิก</button>
+    </div>
+</ng-template>
+
+<ng-template #methodModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">วิธีการดำเนินงาน/แผนการดำเนินงาน</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="row mb-2">
+                <div class="col-md-3">ลำดับที่</div>
+                <div class="col-md-6">1</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-3">วิธีการดำเนินงาน/แผนการดำเนินงาน</div>
+                <div class="col-md-9">
+                    <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-3"></div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-1 form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">ม.ค.</label>
+                        </div>
+                        <div class="col-md-1 form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">ก.พ.</label>
+                        </div>
+                        <div class="col-md-1 form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">มี.ค.</label>
+                        </div>
+                        <div class="col-md-1 form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">เม.ย.</label>
+                        </div>
+                        <div class="col-md-1 form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">พ.ค.</label>
+                        </div>
+                        <div class="col-md-1 form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">มิ.ย.</label>
+                        </div>
+                        <div class="col-md-1 form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">ก.ค.</label>
+                        </div>
+                        <div class="col-md-1 form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">ส.ค.</label>
+                        </div>
+                        <div class="col-md-1 form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">ก.ย.</label>
+                        </div>
+                        <div class="col-md-1 form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">ต.ค.</label>
+                        </div>
+                        <div class="col-md-1 form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">พ.ย.</label>
+                        </div>
+                        <div class="col-md-1 form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">ธ.ค.</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-3">ผู้รับผิดชอบ<br>(ตำแหน่งงาน)</div>
+                <div class="col-md-9">
+                    <input class="form-control" id="index">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">ตกลง</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">ยกเลิก</button>
+    </div>
+</ng-template>

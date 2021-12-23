@@ -19,9 +19,12 @@
 <section class="content">
 <div class="container-fluid">
     <div class="row mb-2">
-        <div class="offset-9 col-3">
+        <div class="offset-10 col-1">
             <button type="button" class="btn btn-block btn-info btn-xs"
                 [routerLink]="'/target-dashboard/'">back</button>
+        </div>
+        <div class="col-1">
+            <button type="button" class="btn btn-block btn-info btn-xs">submit</button>
         </div>
     </div>
     <div class="row mb-2">
@@ -33,40 +36,48 @@
                 <form>
                     <div class="card-body">
                         <div class="row mb-2">
-                            <label for="targetType" class="offset-md-1 col-md-2 col-form-label">Target Type:</label>
-                            <label class="col-md-3 col-form-label">{{runningNoData['Target Type']}}</label>
+                            <label for="targetType" class="offset-md-1 col-md-2 col-form-label">ประเภทเป้าหมาย:</label>
+                            <div class="col-md-3">
+                                <ng-select [items]="targetTypes" bindLabel="name" bindValue="value" [(ngModel)]="selectedTargetType"
+                                    placeholder="กรุณาเลือก" name="targetType">
+                                </ng-select>
+                            </div>
                             <label for="runningNo" class="offset-md-1 col-md-2 col-form-label">Running No.:</label>
-                            <label class="col-md-3 col-form-label">{{runningNoData['Running No.']}}</label>
+                            <label class="col-md-3 col-form-label"></label>
                         </div>
                         <div class="row mb-2">
-                            <label for="division" class="offset-md-1 col-md-2 col-form-label">Site:</label>
-                            <label class="col-md-3 col-form-label">{{runningNoData['Site']}}</label>
+                            <label for="site" class="offset-md-1 col-md-2 col-form-label">Site:</label>
+                            <label class="col-md-3 col-form-label">สำนักงานนอร์ธปาร์ค</label>
                             <label for="status" class="offset-md-1 col-md-2 col-form-label">Status:</label>
-                            <label class="col-md-3 col-form-label">{{runningNoData['Status']}}</label>
+                            <label class="col-md-3 col-form-label">New</label>
                         </div>
                         <div class="row mb-2">
                             <label for="division" class="offset-md-1 col-md-2 col-form-label">Division:</label>
-                            <label class="col-md-3 col-form-label">{{runningNoData['Division']}}</label>
+                            <label class="col-md-3 col-form-label">ฝ่ายเทคโนโลยีสารสนเทศ (ITCSD)</label>
                             <label for="revisionNo" class="offset-md-1 col-md-2 col-form-label">Revision No.:</label>
-                            <label class="col-md-3 col-form-label">{{runningNoData['Revision No.']}}</label>
+                            <label class="col-md-3 col-form-label">NONE</label>
                         </div>
                         <div class="row">
                             <label for="department" class="offset-md-1 col-md-2 col-form-label">Department:</label>
-                            <label class="col-md-3 col-form-label">{{runningNoData['Department']}}</label>
-                            <label for="modifyNo" class="offset-md-1 col-md-2 col-form-label">Department:</label>
-                            <label class="col-md-3 col-form-label">{{runningNoData['Department']}}</label>
+                            <label class="col-md-3 col-form-label"></label>
+                            <label for="modifyNo" class="offset-md-1 col-md-2 col-form-label">Modify No.:</label>
+                            <label class="col-md-3 col-form-label"></label>
                         </div>
                         <div class="row">
                             <label for="year" class="offset-md-1 col-md-2 col-form-label">Year:</label>
-                            <label class="col-md-3 col-form-label">{{runningNoData['Year']}}</label>
-                            <label for="createDate" class="offset-md-1 col-md-2 col-form-label">Create Date:</label>
-                            <label class="col-md-3 col-form-label">{{runningNoData['Create Date']}}</label>
+                            <div class="col-md-3">
+                                <ng-select [items]="years" bindLabel="name" bindValue="value"
+                                    [(ngModel)]="selectedYear" placeholder="กรุณาเลือก" name="year">
+                                </ng-select>
+                            </div>
+                            <label for="dateCreate" class="offset-md-1 col-md-2 col-form-label">Date Create:</label>
+                            <label class="col-md-3 col-form-label">22/06/2013</label>
                         </div>
                         <div class="row">
                             <label for="creator" class="offset-md-1 col-md-2 col-form-label">Creator:</label>
-                            <label class="col-md-3 col-form-label">{{runningNoData['Creator']}}</label>
-                            <label for="issuedDate" class="offset-md-1 col-md-2 col-form-label">Issued Date:</label>
-                            <label class="col-md-3 col-form-label">{{runningNoData['Issued Date']}}</label>
+                            <label class="col-md-3 col-form-label">Thanawan Sankum</label>
+                            <label for="dateDue" class="offset-md-1 col-md-2 col-form-label">Date Due:</label>
+                            <label class="col-md-3 col-form-label"></label>
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -81,14 +92,13 @@
         </div>
     </div>
     <div style="margin: -12px -10px">
-        <app-target-table
-            [title]="'เป้าหมายหลัก'"
-            [dataSource]="targets" [displayedColumns]="displayedColumns" [referenceId]="'Target ID'"
-            [iconKeyReference]="'has_sub_targets'" [renderTemplate]="'subTarget'" 
-            [runningNo]="runningNo"
-            (deleteTarget)="deleteTarget($event)"    
-        >
-        </app-target-table>
+    <app-target-table [dataSource]="targets" [displayedColumns]="displayedColumns" [referenceId]="'Target ID'"
+        [iconKeyReference]="'has_sub_targets'" [renderTemplate]="'subTarget'" 
+        [runningNo]="runningNo"
+        [title]="'เป้าหมายหลัก'"
+        (deleteTarget)="deleteTarget($event)"    
+    >
+    </app-target-table>
     </div>
 </div>
 </section>

@@ -1,28 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { expandableTableRowAnimation } from '../shared/animations/expandable-table-row.animation';
 import { RunningNoData, Target } from '../shared/interfaces/target.interface';
 import { DataService } from '../shared/services/data.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-target-detail',
-  templateUrl: './target-detail.component.html',
-  styleUrls: ['./target-detail.component.scss'],
-  animations: [expandableTableRowAnimation]
+  selector: 'app-new-target',
+  templateUrl: './new-target.component.html',
+  styleUrls: ['./new-target.component.scss']
 })
-export class TargetDetailComponent implements OnInit {
+export class NewTargetComponent implements OnInit {
   runningNo: string;
   runningNoData: RunningNoData;
   targets: Target[];
+  selectedTargetType?: number = undefined;
+  selectedYear?: number = undefined;
 
-  displayedColumns: string[] = [
-    'expandIcon',
-    'Target ID',
-    'Name',
-    'Standard',
-    'Relative Target',
-    'deleteIcon'
+  targetTypes = [
+    { name: 'targetType1', value: 1 },
+    { name: 'targetType2', value: 2 }
+  ];
+
+  years = [
+    { name: '2021', value: 1 },
+    { name: '2022', value: 2 }
   ];
 
   // target Modal
@@ -39,6 +40,15 @@ export class TargetDetailComponent implements OnInit {
   selectedStandard: string;
   selectedBond: string;
 
+  displayedColumns: string[] = [
+    'expandIcon',
+    'Target ID',
+    'Name',
+    'Standard',
+    'Relative Target',
+    'deleteIcon'
+  ];
+
   constructor(
     private route: ActivatedRoute, 
     private dataService: DataService,
@@ -46,14 +56,7 @@ export class TargetDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      console.log(params.get('runningNo'));
-      this.runningNo = params.get('runningNo');
-      this.runningNoData = this.dataService.getRunningNoData(this.runningNo);
-      if (this.dataService.getRunningNo(this.runningNo).kids.has_targets) {
-        this.targets = this.dataService.getTargets(this.runningNo);
-      }
-    });
+    this.targets = undefined;
   }
 
   deleteTarget(index: number) {

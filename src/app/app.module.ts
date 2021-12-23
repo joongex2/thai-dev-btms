@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { UserMaterialModule } from './user-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { MenuListItemComponent } from './menu-list-item/menu-list-item.component
 import { MainComponent } from './main/main.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { DataService } from './shared/services/data.service';
+import { NewTargetComponent } from './new-target/new-target.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { DataService } from './shared/services/data.service';
     TargetDetailComponent,
     MenuListItemComponent,
     MainComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    NewTargetComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { DataService } from './shared/services/data.service';
     NgSelectModule,
     FormsModule,
     BrowserAnimationsModule,
-    UserMaterialModule
+    UserMaterialModule,
+    NgbModule
   ],
   providers: [
     DataService

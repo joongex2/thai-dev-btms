@@ -21,7 +21,7 @@ export class AppmenuComponent implements OnInit {
         },
         {
           name: 'สร้างเป้าหมายใหม่',
-          path: ['/2']
+          path: ['/new-target']
         }
       ]
     },
