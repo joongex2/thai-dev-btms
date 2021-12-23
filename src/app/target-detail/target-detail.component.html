@@ -1,0 +1,68 @@
+<section class="content">
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="offset-9 col-3">
+            <button type="button" class="btn btn-block btn-info btn-xs"
+                [routerLink]="'/target-dashboard/'">back</button>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form>
+                    <div class="card-body">
+                        <div class="row mb-2">
+                            <label for="targetType" class="offset-md-1 col-md-2 col-form-label">Target Type:</label>
+                            <label class="col-md-3 col-form-label">{{runningNoData['Target Type']}}</label>
+                            <label for="runningNo" class="offset-md-1 col-md-2 col-form-label">Running No.:</label>
+                            <label class="col-md-3 col-form-label">{{runningNoData['Running No.']}}</label>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="division" class="offset-md-1 col-md-2 col-form-label">Site:</label>
+                            <label class="col-md-3 col-form-label">{{runningNoData['Site']}}</label>
+                            <label for="status" class="offset-md-1 col-md-2 col-form-label">Status:</label>
+                            <label class="col-md-3 col-form-label">{{runningNoData['Status']}}</label>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="division" class="offset-md-1 col-md-2 col-form-label">Division:</label>
+                            <label class="col-md-3 col-form-label">{{runningNoData['Division']}}</label>
+                            <label for="revisionNo" class="offset-md-1 col-md-2 col-form-label">Revision No.:</label>
+                            <label class="col-md-3 col-form-label">{{runningNoData['Revision No.']}}</label>
+                        </div>
+                        <div class="row">
+                            <label for="department" class="offset-md-1 col-md-2 col-form-label">Department:</label>
+                            <label class="col-md-3 col-form-label">{{runningNoData['Department']}}</label>
+                            <label for="modifyNo" class="offset-md-1 col-md-2 col-form-label">Department:</label>
+                            <label class="col-md-3 col-form-label">{{runningNoData['Department']}}</label>
+                        </div>
+                        <div class="row">
+                            <label for="year" class="offset-md-1 col-md-2 col-form-label">Year:</label>
+                            <label class="col-md-3 col-form-label">{{runningNoData['Year']}}</label>
+                            <label for="createDate" class="offset-md-1 col-md-2 col-form-label">Create Date:</label>
+                            <label class="col-md-3 col-form-label">{{runningNoData['Create Date']}}</label>
+                        </div>
+                        <div class="row">
+                            <label for="creator" class="offset-md-1 col-md-2 col-form-label">Creator:</label>
+                            <label class="col-md-3 col-form-label">{{runningNoData['Creator']}}</label>
+                            <label for="issuedDate" class="offset-md-1 col-md-2 col-form-label">Issued Date:</label>
+                            <label class="col-md-3 col-form-label">{{runningNoData['Issued Date']}}</label>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </form>
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+    <div style="margin: -12px -10px">
+    <app-target-table [dataSource]="targets" [displayedColumns]="displayedColumns" [referenceId]="'Target ID'"
+        [iconKeyReference]="'has_sub_targets'" [renderTemplate]="'subTarget'" 
+        [runningNo]="runningNo"
+        (deleteTarget)="deleteTarget($event)">
+    </app-target-table>
+    </div>
+</div>
+</section>

@@ -1,0 +1,143 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">ข้อมูลเป้าหมายของฉัน</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">ข้อมูลเป้าหมายของฉัน</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- Search row -->
+        <div class="row">
+            <!-- left column -->
+            <div class="col-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form>
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <label for="site" class="offset-md-1 col-md-2 col-form-label">Site:</label>
+                                <div class="col-md-3">
+                                    <ng-select [items]="sites" bindLabel="name" bindValue="value"
+                                        [(ngModel)]="selectedSite" placeholder="กรุณาเลือก" name="site">
+                                    </ng-select>
+                                </div>
+                                <label for="status" class="offset-md-1 col-md-2 col-form-label">Status:</label>
+                                <div class="col-md-3">
+                                    <!-- <input class="form-control" id="status" placeholder="กรุณาเลือก"> -->
+                                    <ng-select [items]="status" bindLabel="name" bindValue="value"
+                                        [(ngModel)]="selectedStatus" placeholder="กรุณาเลือก" name="status">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label for="division" class="offset-md-1 col-md-2 col-form-label">Division:</label>
+                                <div class="col-md-3">
+                                    <ng-select [items]="divisions" bindLabel="name" bindValue="value"
+                                        [(ngModel)]="selectedDivision" placeholder="กรุณาเลือก" name="division">
+                                    </ng-select>
+                                </div>
+                                <label for="runningNo" class="offset-md-1 col-md-2 col-form-label">Running No.:</label>
+                                <div class="col-md-3">
+                                    <input class="form-control" id="runningNo">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label for="department" class="offset-md-1 col-md-2 col-form-label">Department:</label>
+                                <div class="col-md-3">
+                                    <ng-select [items]="departments" bindLabel="name" bindValue="value"
+                                        [(ngModel)]="selectedDepartment" placeholder="กรุณาเลือก" name="department">
+                                    </ng-select>
+                                </div>
+                                <label for="status" class="offset-md-1 col-md-2 col-form-label">Year:</label>
+                                <div class="col-md-3">
+                                    <input class="form-control" id="year">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="targetType" class="offset-md-1 col-md-2 col-form-label">Target type:</label>
+                                <div class="col-md-3">
+                                    <ng-select [items]="targetTypes" bindLabel="name" bindValue="value"
+                                        [(ngModel)]="selectedTargetType" placeholder="กรุณาเลือก" name="targetType">
+                                    </ng-select>
+                                </div>
+                            </div>
+
+                            <!-- <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                    placeholder="Enter email">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1"
+                                    placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile">File input</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Upload</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                            </div> -->
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer" style="text-align: right">
+                            <button type="submit" class="btn btn-primary mr-2">Search</button>
+                            <button class="btn btn-primary">Clear</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+        <!-- /.row -->
+        <!-- Running Table Row -->
+        <!-- <div class="row">
+            <div class="col-12"> -->
+                <mat-table mat-table [dataSource]="runningNos" class="mat-elevation-z8" style="width:100%">
+                    <ng-container *ngFor="let key of displayedColumns" [matColumnDef]="key">
+                        <mat-header-cell *matHeaderCellDef>{{ key === 'Detail' ? '' : key }}</mat-header-cell>
+                        <mat-cell *matCellDef="let element; let i = dataIndex">
+                            <span *ngIf="key !== 'Detail';else detail">{{ element.data[key] }}</span>
+                            <ng-template #detail>
+                                <button type="button" class="btn btn-block btn-info btn-xs" [routerLink]="'/target-detail/'+element.data['Running No.']">detail</button>
+                            </ng-template>
+                        </mat-cell>
+                    </ng-container>
+                    
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            </div>
+        <!-- </div>
+        <a [routerLink]="'/target-detail'">a</a>
+    </div> -->
+    <!--/. container-fluid -->
+</section>
+<!-- /.content -->
