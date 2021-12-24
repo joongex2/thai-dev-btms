@@ -27,8 +27,9 @@ export class TargetDetailComponent implements OnInit {
 
   // target Modal
   standards = [
-    { name: 'standard1', value: 1 },
-    { name: 'standard2', value: 2 }
+    { name: 'ISO9001/GMP/HACCP', value: 1, type: 1 },
+    { name: 'ISO9001', value: 2, type: 1 },
+    { name: 'GMP', value: 3, type: 1 }
   ];
 
   bonds = [
@@ -40,7 +41,7 @@ export class TargetDetailComponent implements OnInit {
   selectedBond: string;
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private dataService: DataService,
     private modalService: NgbModal
   ) { }

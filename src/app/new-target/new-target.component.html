@@ -18,13 +18,15 @@
 
 <section class="content">
 <div class="container-fluid">
-    <div class="row mb-2">
-        <div class="offset-10 col-1">
-            <button type="button" class="btn btn-block btn-info btn-xs"
-                [routerLink]="'/target-dashboard/'">back</button>
+    <div class="row mb-2" style="justify-content: flex-end; padding: 7.5px">
+        <div>
+            <!-- <button type="button" class="btn btn-block btn-info btn-xs"
+                [routerLink]="'/target-dashboard/'">Back</button> -->
+            <a href="/target-dashboard"><i class="far fa-arrow-alt-circle-left"></i>&nbsp;Back</a>
         </div>
-        <div class="col-1">
-            <button type="button" class="btn btn-block btn-info btn-xs">submit</button>
+        <div class="ml-2">
+            <!-- <button type="button" class="btn btn-block btn-info btn-xs">Submit</button> -->
+            <a href="/target-dashboard"><i class="far fa-check-circle"></i>&nbsp;Submit</a>
         </div>
     </div>
     <div class="row mb-2">
@@ -87,8 +89,8 @@
         </div>
     </div>
     <div class="row mb-2">
-        <div class="col-12" style="text-align: right;">
-            <a (click)="addTarget(targetModal)" style="cursor: pointer; color: rgba(0,0,0,.87);"><i class="fas fa-plus"></i></a>
+        <div class="col-12" style="text-align: right; color: #007bff">
+            <a (click)="addTarget(targetModal)" style="cursor: pointer;" title="เพิ่มเป้าหมายหลัก"><i class="fas fa-plus"></i></a>
         </div>
     </div>
     <div style="margin: -12px -10px">

@@ -17,11 +17,10 @@
 
                     <!-- <mat-icon *ngIf="!title && key === 'deleteIcon'" (click)="deleteTarget.next(i)">delete_forever
                     </mat-icon> -->
-
-                    <a *ngIf="renderTemplate === 'subTarget' && key === 'deleteIcon'" (click)="addSubTarget(element.data['Target ID'], subTargetModal)" style="cursor: pointer; color: rgba(0,0,0,.87);"><i class="fas fa-plus"></i>
+                    <a *ngIf="renderTemplate === 'subTarget' && key === 'deleteIcon'" (click)="addSubTarget(element.data['Target ID'], subTargetModal)" style="cursor: pointer; " title="เพิ่มเป้าหมายย่อย"><i class="fas fa-plus"></i>
                     </a>
-
-                    <a *ngIf="renderTemplate === 'method' && key === 'deleteIcon'" (click)="addMethod(element.data['Sub Target ID'], methodModal)" style="cursor: pointer; color: rgba(0,0,0,.87);"><i class="fas fa-plus"></i>
+                    
+                    <a *ngIf="renderTemplate === 'method' && key === 'deleteIcon'" (click)="addMethod(element.data['Sub Target ID'], methodModal)" style="cursor: pointer; " title="เพิ่มวิธีการดำเนินงาน"><i class="fas fa-plus"></i>
                     </a>
                 </ng-template>
 

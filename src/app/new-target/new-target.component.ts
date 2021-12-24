@@ -17,8 +17,9 @@ export class NewTargetComponent implements OnInit {
   selectedYear?: number = undefined;
 
   targetTypes = [
-    { name: 'targetType1', value: 1 },
-    { name: 'targetType2', value: 2 }
+    { name: 'ระบบคุณภาพ', value: 1 },
+    { name: 'ระบบการจัดการ', value: 2 },
+    { name: 'ระบบ WCM', value: 3 }
   ];
 
   years = [
@@ -28,8 +29,9 @@ export class NewTargetComponent implements OnInit {
 
   // target Modal
   standards = [
-    { name: 'standard1', value: 1 },
-    { name: 'standard2', value: 2 }
+    { name: 'ISO9001/GMP/HACCP', value: 1, type: 1 },
+    { name: 'ISO9001', value: 2, type: 1 },
+    { name: 'GMP', value: 3, type: 1 }
   ];
 
   bonds = [

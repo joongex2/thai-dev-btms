@@ -35,8 +35,9 @@ export class TargetDashboardComponent implements OnInit {
   ];
 
   targetTypes = [
-    { name: 'targetType1', value: 1 },
-    { name: 'targetType2', value: 2 }
+    { name: 'ระบบคุณภาพ', value: 1 },
+    { name: 'ระบบการจัดการ', value: 2 },
+    { name: 'ระบบ WCM', value: 3 }
   ];
 
   displayedColumns: string[] = [

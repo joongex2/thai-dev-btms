@@ -125,7 +125,7 @@
                         <mat-cell *matCellDef="let element; let i = dataIndex">
                             <span *ngIf="key !== 'Detail';else detail">{{ element.data[key] }}</span>
                             <ng-template #detail>
-                                <a [routerLink]="'/target-detail/'+element.data['Running No.']"><u>Details</u></a>
+                                <a [routerLink]="'/target-detail/'+element.data['Running No.']"><i class="fas fa-bars"></i></a>
                             </ng-template>
                         </mat-cell>
                     </ng-container>

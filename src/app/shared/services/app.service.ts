@@ -18,7 +18,7 @@ export class AppService {
                 const token = '15269';
                 localStorage.setItem('token', token);
                 await this.getProfile();
-                this.router.navigate(['/']);
+                this.router.navigate(['/dashboard1']);
             } else {
                 throw Error('failed');
             }
