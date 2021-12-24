@@ -9,6 +9,23 @@ import { NavItem } from '../shared/interfaces/nav-item.interface';
 export class AppmenuComponent implements OnInit {
   @Input() menu: any = [
     {
+      name: 'dashboard',
+      children: [
+        {
+          name: 'dashboard1',
+          path: ['/dashboard1'],
+        }, 
+        {
+          name: 'dashboard2',
+          path: ['/dashboard2'],
+        },
+        {
+          name: 'dashboard3',
+          path: ['/dashboard3'],
+        },
+      ]
+    },
+    {
       name: 'ข้อมูลเป้าหมาย',
       children: [
         {
